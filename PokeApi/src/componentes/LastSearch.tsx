@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react';
-
 interface LastSearchProps {
-  searches: string[];
-  onSearchClick?: (search: string) => void;
+  searches: string[]
 }
 
-const LastSearch = ({ searches, onSearchClick }: LastSearchProps) => {
+const LastSearch = ({ searches }: LastSearchProps) => {
   return (
     <div className="w-full max-w-4xl mx-auto mt-8 px-4">
       <div className="border border-gray-600 rounded-lg p-6 bg-gray-800/50">
@@ -20,21 +17,19 @@ const LastSearch = ({ searches, onSearchClick }: LastSearchProps) => {
         ) : (
           <div className="flex flex-wrap gap-3 justify-center">
             {searches.map((search, index) => (
-              <button
+              <div
                 key={index}
-                onClick={() => onSearchClick?.(search)}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-full 
-                         transition-colors duration-200 capitalize border border-gray-600
-                         hover:border-gray-500"
+                className="px-4 py-2 bg-gray-700 text-white rounded-full 
+                         capitalize border border-gray-600"
               >
                 {search}
-              </button>
+              </div>
             ))}
           </div>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LastSearch;
+export default LastSearch
