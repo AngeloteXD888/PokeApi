@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface SearchBarProps {
   onSearch: (query: string) => void
@@ -21,6 +21,15 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     }
   }
 
+  function onUpdateHistorial(query: string) {
+    console.log("Actualizando historial con:", query);
+  }
+
+  useEffect(() => {
+    console.log(`ha cambiado el query: ${query}`);
+    const intervalId = setInterval(() => { onUpdateHistorial(query); }, 1000); return () => { clearInterval(intervalId); };
+  }, [query]);
+
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-10 px-4">
       {/* Input */}
@@ -32,7 +41,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         onKeyPress={handleKeyPress}
         className="w-full md:w-96 px-4 py-3 rounded-lg text-lg
                    border-2 border-gray-300
-                   focus:outline-none focus:border-green-500"
+                   focus:outline-none focus:border-green-500 text-white"
       />
 
       {/* Botón */}
@@ -49,3 +58,5 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
 }
 
 export default SearchBar
+
+
